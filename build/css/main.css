@@ -1,0 +1,17 @@
+body {
+  background-color: #303038;
+  color: #fff;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;
+  font-size: 1.5em;
+}
+#infos {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+#infos span {
+  color: #fff !important;
+  margin-right: 10px;
+}
+#infos p {
+  display: inline;
+}
