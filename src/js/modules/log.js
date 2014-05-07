@@ -3,7 +3,12 @@ var Log = function (el) {
 }
 
 Log.prototype = {
-	
+		
+	/**
+	 * Log a new message
+	 * @param {String} message
+	 * @param {String} color
+	 */
 	send: function (message, color) {		
 		var line = document.createElement('div');
 
@@ -19,7 +24,7 @@ Log.prototype = {
 
 		line.appendChild(span);
 		line.appendChild(text);
-
+		
 		this.el.appendChild(line);
 	}
 
