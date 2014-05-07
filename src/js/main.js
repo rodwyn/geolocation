@@ -11,10 +11,10 @@ geo.localize(function (position) {
 	var longitude = position.coords.longitude;
 	var accuracy = position.coords.accuracy;
 
-	log.send('Position found', 'green');
-	log.send('Lattitude: ' + latitude, 'green');
-	log.send('Longitude: ' + longitude, 'green');
-	log.send('Accuracy: ' + accuracy, 'green');
+	log.send('Position found');
+	log.send('Lattitude: ' + latitude);
+	log.send('Longitude: ' + longitude);
+	log.send('Accuracy: ' + accuracy + '%');
 
 	log.send('Preparing the request');
 
@@ -26,26 +26,30 @@ geo.localize(function (position) {
 	request.onload = function () {
 		if(request.status >= 200 && request.status < 400) {
 			var hospitals = JSON.parse(request.responseText);
-			log.send('Request success', 'green');
-			log.send('Data: ', 'blue');
+			log.send('Request success', '#98D69D');
+			log.send('Data: ', '#B698D6');
+
+			if(hospitals.length == 0) {
+				log.send('Hospital list empty', '#E3445F');
+			}
 
 			for(var i = 0; i < hospitals.length; i++) {
 				var hospital = hospitals[i];
-				log.send('Hospital ' + hospital.name + ', ' + hospital.distance + 'km from here', 'blue');
+				log.send('Hospital ' + hospital.name + ', ' + hospital.distance + 'km from here', '#B698D6');
 			}
 		} else {
-			log.send('Request response error', 'red');
+			log.send('Request response error', '#E3445F');
 		}
 	};
 
 	request.onerror = function () {
-		log.send('Request connection error', 'red');
+		log.send('Request connection error', '#E3445F');
 	};
 
 	request.send();
 
 	log.send('Request sent');
-	log.send(url, 'blue');
+	log.send(url, '#D698B9');
 });
 
 log.send('Looking for your position');
