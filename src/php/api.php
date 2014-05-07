@@ -1,10 +1,10 @@
 <?php
-function getDistance($coordA, $coordB) {
+function getDistance($lat1, $lon1, $lat2, $lon2) {
 	$R = 6371;
-	$dLat = deg2rad($coordB['latitude'] - $coordA['latitude']);
-	$dLon = deg2rad($coordB['longitude'] - $coordA['longitude']);
+	$dLat = deg2rad($lat2 - $lat1);
+	$dLon = deg2rad($lon2 - $lon1);
 	$a = sin($dLat/2) * sin($dLat/2) +
-		cos(deg2rad($coordA['latitude'])) * cos(deg2rad($coordB['latitude'])) *
+		cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
 		sin($dLon/2) * sin($dLon/2);
 
 	$c = 2 * atan2(sqrt(a), sqrt(1-a));
@@ -31,26 +31,26 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
 $hospitals = array(
 	array(
-		'name' => 'Luke',
+		'name' => 'Hello',
 		'latitude' => 43.540585,
 		'longitude' => 58.183594
 	),
 	array(
-		'name' => 'Han',
+		'name' => 'World',
 		'latitude' => 27.281485,
 		'longitude' => 106.040039
 	),
 	array(
-		'name' => 'R2D2',
+		'name' => 'Foo',
 		'latitude' => 27.319124,
 		'longitude' => 107.508774
 	),
 	array(
-		'name' => 'C3PO',
+		'name' => 'Bar',
 		'latitude' => 27.948123,
 		'longitude' => 108.286057
 	),array(
-		'name' => 'Emperor',
+		'name' => 'Shanghai',
 		'latitude' => 32.281328,
 		'longitude' => 119.948730
 	)
@@ -64,7 +64,8 @@ if(isset($_GET['lat']) && isset($_GET['long'])) {
 	// get the distance
 	foreach($hospitals as $key => $hospital) {
 		
-		$distance = distance(floatval($_GET['lat']), floatval($_GET['long']), $hospital['latitude'], $hospital['longitude'], 'K');
+		//$distance = distance(floatval($_GET['lat']), floatval($_GET['long']), $hospital['latitude'], $hospital['longitude'], 'K');
+		$distance = distance(floatval($_GET['lat']), floatval($_GET['long']), $hospital['latitude'], $hospital['longitude']);
 		
 		// modify the original array
 		$hospitals[$key]['distance'] = $distance;
